@@ -47,8 +47,8 @@ public class Llamada {
         this.cambiosEstado = cambios;
     }
     // constructor prueba solo para cargar una llamada sin encuesta 
-    public Llamada(String fechaHoraInicioStr, String fechaHoraFinStr, ArrayList<RespuestaDeCliente> respuestas, Cliente cliente, ArrayList<CambioEstado> cambios) throws ParseException {
-    this(fechaHoraInicioStr, fechaHoraFinStr, null, respuestas, cliente, cambios);
+    public Llamada(String fechaHoraInicioStr, String fechaHoraFinStr, Encuesta encuestaEnviada, Cliente cliente, ArrayList<CambioEstado> cambios) throws ParseException {
+    this(fechaHoraInicioStr, fechaHoraFinStr, encuestaEnviada, null, cliente, cambios);
 }
     
       public Llamada(Cliente cliente) {

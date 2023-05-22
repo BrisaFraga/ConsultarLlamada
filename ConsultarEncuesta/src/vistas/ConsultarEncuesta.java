@@ -7,20 +7,13 @@ package vistas;
 
 import entidades.GestorConsultarLlamada;
 import entidades.Llamada;
-import entidades.Pregunta;
-import entidades.RespuestaDeCliente;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 
 /**
  *
@@ -56,6 +49,7 @@ public class ConsultarEncuesta extends javax.swing.JFrame {
         jList1 = new javax.swing.JList<>();
         btnSeleccionarLlamada = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        lvlSeleccioneUnaLlamada = new javax.swing.JLabel();
 
         button1.setLabel("button1");
 
@@ -88,28 +82,34 @@ public class ConsultarEncuesta extends javax.swing.JFrame {
             }
         });
 
+        lvlSeleccioneUnaLlamada.setText("Llamadas Encontradas, seleccione una:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(fechaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(fechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBuscar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnCancelar))
-                            .addComponent(jLabel2)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1060, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSeleccionarLlamada, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1060, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSeleccionarLlamada, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(fechaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1))
+                            .addGap(29, 29, 29)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(fechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnBuscar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnCancelar))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addGap(0, 0, Short.MAX_VALUE)))))
+                    .addComponent(lvlSeleccioneUnaLlamada, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -122,12 +122,14 @@ public class ConsultarEncuesta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(fechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fechaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnBuscar)
-                        .addComponent(btnCancelar)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                        .addComponent(btnCancelar))
+                    .addComponent(fechaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(lvlSeleccioneUnaLlamada)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSeleccionarLlamada)
                 .addGap(18, 18, 18))
@@ -146,6 +148,11 @@ public class ConsultarEncuesta extends javax.swing.JFrame {
         }
 
         gestorConsultarLlamada.buscarLlamadasPorFechas(fechaInicio, fechaFin); 
+        
+        if (gestorConsultarLlamada.getLlamadasFiltradas().isEmpty()) {
+    JOptionPane.showMessageDialog(this, "No hay Llamadas con encuesta respondida en el periodo seleccionado.", "Error", JOptionPane.ERROR_MESSAGE);
+}else {
+        
         DefaultListModel<String> model = new DefaultListModel<>();
     List<Llamada> llamadasFiltradas = gestorConsultarLlamada.getLlamadasFiltradas();
 
@@ -153,13 +160,13 @@ public class ConsultarEncuesta extends javax.swing.JFrame {
         model.addElement(gestorConsultarLlamada.mostrarLlamadasString(llamada)); // Asumiendo que tienes un método toString en la clase Llamada para obtener una representación en texto.
     }
 
-    jList1.setModel(model);
+    jList1.setModel(model);}
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnSeleccionarLlamadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarLlamadaActionPerformed
 // Obtener el índice seleccionado en la lista
     int selectedIndex = jList1.getSelectedIndex();
-
+    
     // Verificar si se seleccionó una llamada
     if (selectedIndex != -1) {
         // Obtener la llamada seleccionada
@@ -169,16 +176,33 @@ public class ConsultarEncuesta extends javax.swing.JFrame {
         String mensaje = gestorConsultarLlamada.formatearLlamadaSelecionada(gestorConsultarLlamada.getLlamadaSeleccionada());
        
         // Mostrar el mensaje en una ventana emergente con botones
-int option = JOptionPane.showOptionDialog(this, mensaje, "Detalles de la llamada", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Generar CSV", "Imprimir Archivo"}, null);
+        int option = JOptionPane.showOptionDialog(this, mensaje, "Detalles de la llamada", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,new Object[]{"Generar CSV", "Imprimir Archivo", "Cancelar"}, null);
 
-// Verificar la opción seleccionada
-if (option == 0) {
-    // Opción "Generar CSV" seleccionada
-    // Agrega aquí la lógica para generar el archivo CSV
-} else if (option == 1) {
-    // Opción "Imprimir Archivo" seleccionada
-    // Agrega aquí la lógica para imprimir el archivo
-}   gestorConsultarLlamada.generarCSV();
+        // Verificar la opción seleccionada
+        if (option == 0) {
+            // Opción "Generar CSV" seleccionada
+            gestorConsultarLlamada.generarCSV();
+               // Después de generar el CSV exitosamente
+            JOptionPane.showOptionDialog(
+                this,
+                "CSV generado con éxito.",
+                "Éxito",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                new Object[]{"Continuar"},
+                null
+            );
+            
+
+
+        } else if (option == 1) {
+            // Opción "Imprimir Archivo" seleccionada
+            // Agrega aquí la lógica para imprimir el archivo
+        } else if (option == 2) {
+    // Opción "Cancelar" seleccionada
+    System.exit(0); // Cierra la aplicación
+}  
 
     } else {
         // No se seleccionó ninguna llamada
@@ -188,6 +212,7 @@ if (option == 0) {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_btnCancelarActionPerformed
     
 
@@ -242,5 +267,6 @@ if (option == 0) {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lvlSeleccioneUnaLlamada;
     // End of variables declaration//GEN-END:variables
 }

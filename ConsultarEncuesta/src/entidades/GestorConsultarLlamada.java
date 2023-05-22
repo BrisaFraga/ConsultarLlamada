@@ -72,7 +72,7 @@ public class GestorConsultarLlamada {
         preguntas.add(pregunta);
         pregunta.setPregunta("¿La atencion del operador fue agradable?");
         preguntas.add(pregunta);
-//encuetsa prueba
+        //encuetsa prueba
         Encuesta encuesta = new Encuesta("11/05/2023 12:00:00", preguntas,"Encuesta para saber la conformidad del cliente con la atencion y resolucion del problema");
         //respuestas de encuesta prueba solo realizare 2
         ArrayList<RespuestaDeCliente> respuestas = new ArrayList();
@@ -84,7 +84,7 @@ public class GestorConsultarLlamada {
         llamadas.add(new Llamada("10/05/2023 12:02:02","10/05/2023 13:00:00",encuesta,respuestas, cliente, cambios));
         llamadas.add(new Llamada("11/05/2023 12:02:02","11/05/2023 13:00:00",encuesta,respuestas, cliente, cambios));
         llamadas.add(new Llamada("20/05/2023 12:02:02","20/05/2023 13:00:00",encuesta,respuestas, cliente, cambios));
-        llamadas.add(new Llamada("12/05/2023 12:02:02","13/05/2023 13:00:00",respuestas, cliente, cambios));
+        llamadas.add(new Llamada("12/05/2023 12:02:02","13/05/2023 13:00:00",encuesta, cliente, cambios));
 
         this.llamadaSeleccionada = new Llamada();
         this.llamadasFiltradas = new ArrayList();
@@ -100,7 +100,7 @@ public class GestorConsultarLlamada {
         for (Llamada llamada : llamadas) {
             Date fechaLlamada = llamada.getFechaHoraInicio();
             if (fechaLlamada.after(fechaInicio) && fechaLlamada.before(fechaFin)  ) {
-                if (llamada.getEncuestaEnviada() != null){
+                if (llamada.getRespuestasDeEncuesta()!= null){
                 llamadasEncontradas.add(llamada);
             }}
         }
