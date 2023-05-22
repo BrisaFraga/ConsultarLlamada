@@ -41,7 +41,7 @@ public class CambioEstado {
     public String toString() {
          SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         String fechaInicioStr = sdf.format(fechaHoraInicio);
-        return "CambioEstado{" + "fechaHoraInicio=" + fechaInicioStr + ", estado=" + estado + '}';
+        return "CambioEstado: " + "Fecha y Hora Inicio: " + fechaInicioStr + " | " + estado + '}';
     }
     
     

@@ -67,7 +67,9 @@ public void setFechaFinVigencia(String fechaFinVigenciaString, String formatoFec
 
     @Override
     public String toString() {
-        return "Encuesta{" + "fechaFinVigencia=" + fechaFinVigencia + ", preguntas=" + preguntas + ", descripcion=" + descripcion + '}';
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String fechaFin = sdf.format(fechaFinVigencia);
+        return " Descripcion: " + descripcion + " | Fecha Fin Vigencia: " + fechaFin + "| Preguntas: [ " + preguntas + " ] ";
     }
     
     

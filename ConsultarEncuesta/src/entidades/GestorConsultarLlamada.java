@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -56,7 +57,7 @@ public class GestorConsultarLlamada {
     
 
    
-
+// un constructor de gestor donde se guardan objetos Llamadas para realizar pruebas sin necesidad de un bd
     public GestorConsultarLlamada() throws ParseException {
         Cliente cliente= new Cliente("Brisa Fraga", 43556677L, 3567845876L);
        //array de cambios estados de prueba
@@ -140,9 +141,12 @@ public class GestorConsultarLlamada {
         String mensaje = "Cliente: " + cliente + "\n"
                 + "Estado actual: " + estadoActual + "\n"
                 + "Duración de la llamada: " + duracionLlamada + " minutos\n\n"
-                + "Respuestas seleccionadas: " + respuestasSeleccionadas + "\n"
-                + "Descripción de las preguntas: " + descripcionPreguntas + "\n"
-                + "Descripción de la encuesta: " + descripcionEncuesta;
+                
+                + " - Encuesta: \nDescripción de la encuesta: " + descripcionEncuesta +"\n"
+                + "Descripción de las preguntas: \n " + descripcionPreguntas + "\n"
+                + "Respuestas seleccionadas: \n" + respuestasSeleccionadas + "\n";
+                
+                
 
     return mensaje;}
     
@@ -190,5 +194,14 @@ public class GestorConsultarLlamada {
     } catch (IOException e) {
     }
 }
+
+    public String mostrarLlamadasString(Llamada llamada) {
+          SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String fechaInicioStr = sdf.format(llamada.fechaHoraInicio);
+        String fechaFinStr = sdf.format(llamada.fechaHoraFin);
+        return "Llamada: " +  " Cliente: [" + llamada.cliente + "] | Duracion: " + llamada.Duracion + " | fechaHoraInicio: " + fechaInicioStr + " | fechaHoraFin: " + fechaFinStr ;
+    
+    }
+    
 
 }

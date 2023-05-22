@@ -41,7 +41,7 @@ public class Pregunta {
 
     @Override
     public String toString() {
-        return "Pregunta{" + "pregunta=" + pregunta + ", respuestas=" + respuestas + '}';
+        return  "[Pregunta: " + pregunta + " - Respuestas: (" + respuestas +") ]";
     }
     
 }

@@ -16,12 +16,12 @@ import java.util.Date;
  * @author Brisa
  */
 public class Llamada {
-    private float Duracion;
-    private Date fechaHoraInicio;
+    float Duracion;
+    Date fechaHoraInicio;
     public Date fechaHoraFin;
     private Encuesta encuestaEnviada;
     public ArrayList<RespuestaDeCliente> respuestasDeEncuesta;
-    private Cliente cliente;
+    Cliente cliente;
     public ArrayList<CambioEstado> cambiosEstado;
 
     //CONSTRUCTOR DE PRUEBA PARA EL JFRAME
@@ -133,7 +133,7 @@ public class Llamada {
          SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         String fechaInicioStr = sdf.format(fechaHoraInicio);
         String fechaFinStr = sdf.format(fechaHoraFin);
-        return "Llamada{" + "Duracion=" + Duracion + ", fechaHoraInicio=" + fechaInicioStr + ", fechaHoraFin=" + fechaFinStr + ", encuestaEnviada=" + encuestaEnviada + ", respuestasDeEncuesta=" + respuestasDeEncuesta + ", cliente=" + cliente + ", cambiosEstado=" + cambiosEstado + '}';
+        return "Llamada: " +  " Cliente: [" + cliente + "] | Duracion: " + Duracion + " | fechaHoraInicio: " + fechaInicioStr + " | fechaHoraFin: " + fechaFinStr + " | Cambios de Estado: [ " + cambiosEstado + " ] |  Encuesta Enviada: [ " + encuestaEnviada + " ] | Respuestas De Encuesta: [" + respuestasDeEncuesta + "] ";
     }
 
     public String getEstadoActual() {

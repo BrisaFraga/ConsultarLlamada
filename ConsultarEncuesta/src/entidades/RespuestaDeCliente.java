@@ -5,6 +5,7 @@
  */
 package entidades;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -38,7 +39,9 @@ public class RespuestaDeCliente {
 
     @Override
     public String toString() {
-        return "RespuestaDeCliente{" + "fechaEncuesta=" + fechaEncuesta + ", respuestaSeleccionada=" + respuestaSeleccionada + '}';
+         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String fechaEn = sdf.format(fechaEncuesta);
+        return "[Fecha Encuesta:" + fechaEn+ " | Respuesta Seleccionada: " + respuestaSeleccionada + ']';
     }
     
     
