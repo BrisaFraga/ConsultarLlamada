@@ -16,12 +16,12 @@ import java.util.Date;
  * @author Brisa
  */
 public class Llamada {
-    float Duracion;
-    Date fechaHoraInicio;
+    public float Duracion;
+    public Date fechaHoraInicio;
     public Date fechaHoraFin;
     private Encuesta encuestaEnviada;
     public ArrayList<RespuestaDeCliente> respuestasDeEncuesta;
-    Cliente cliente;
+    public Cliente cliente;
     public ArrayList<CambioEstado> cambiosEstado;
 
     //CONSTRUCTOR DE PRUEBA PARA EL JFRAME
@@ -46,7 +46,7 @@ public class Llamada {
         // Inicializar la lista de cambios de estado
         this.cambiosEstado = cambios;
     }
-    // constructor prueba solo para cargar una llamada sin encuesta 
+    // constructor prueba solo para cargar una llamada sin respuesta encuesta
     public Llamada(String fechaHoraInicioStr, String fechaHoraFinStr, Encuesta encuestaEnviada, Cliente cliente, ArrayList<CambioEstado> cambios) throws ParseException {
     this(fechaHoraInicioStr, fechaHoraFinStr, encuestaEnviada, null, cliente, cambios);
 }

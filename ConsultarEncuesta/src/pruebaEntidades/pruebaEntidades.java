@@ -6,7 +6,7 @@
 package pruebaEntidades;
 
 import entidades.Cliente;
-import entidades.GestorConsultarLlamada;
+import control.GestorConsultarLlamada;
 import entidades.Llamada;
 import entidades.Pregunta;
 import entidades.RespuestaDeCliente;

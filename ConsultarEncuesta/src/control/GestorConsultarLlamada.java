@@ -3,10 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entidades;
+package control;
 
 import com.opencsv.CSVWriter;
-import java.io.File;
+import entidades.CambioEstado;
+import entidades.Cliente;
+import entidades.Encuesta;
+import entidades.Estado;
+import entidades.Llamada;
+import entidades.Pregunta;
+import entidades.RespuestaDeCliente;
+import entidades.RespuestaPosible;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
@@ -14,18 +21,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
  * @author Brisa
  */
 public class GestorConsultarLlamada {
-    
+    //el arraList llamadas donde cargamos Llamadas porque no usamos bda
     public ArrayList<Llamada> llamadas;
     private ArrayList<Llamada> llamadasFiltradas;
     public Llamada llamadaSeleccionada;
@@ -46,11 +49,11 @@ public class GestorConsultarLlamada {
         this.llamadas = llamadas;
     }
 
-    public ArrayList<Llamada> getLlamadasFiltradas() {
+    public ArrayList<Llamada> getLlamadasConEncuesta() {
         return llamadasFiltradas;
     }
 
-    public void setLlamadasFiltradas(ArrayList<Llamada> llamadasFiltradas) {
+    public void setLlamadasConEncuesta(ArrayList<Llamada> llamadasFiltradas) {
         this.llamadasFiltradas = llamadasFiltradas;
     }
     
@@ -66,7 +69,7 @@ public class GestorConsultarLlamada {
         cambios.add(new CambioEstado(new Estado("Finalizada")));
         //preguntas pruebas para armar encuesta 
         Set<Pregunta> preguntas = new HashSet();
-                Pregunta pregunta = new Pregunta("¿El problema se soluciono?");
+        Pregunta pregunta = new Pregunta("¿El problema se soluciono?");
         pregunta.agregarRespuesta(new RespuestaPosible(1,"Si"));
         pregunta.agregarRespuesta(new RespuestaPosible(2,"No"));
         preguntas.add(pregunta);
@@ -90,10 +93,7 @@ public class GestorConsultarLlamada {
         this.llamadasFiltradas = new ArrayList();
     }
 
-    public void agregarLlamada(Llamada llamada) {
-        llamadas.add(llamada);
-    }
-    
+   
     
     public void buscarLlamadasPorFechas(Date fechaInicio, Date fechaFin) {
         ArrayList<Llamada> llamadasEncontradas = new ArrayList<>();

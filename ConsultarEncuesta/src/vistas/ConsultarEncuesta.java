@@ -5,7 +5,7 @@
  */
 package vistas;
 
-import entidades.GestorConsultarLlamada;
+import control.GestorConsultarLlamada;
 import entidades.Llamada;
 import java.text.ParseException;
 import java.util.Date;
@@ -40,13 +40,13 @@ public class ConsultarEncuesta extends javax.swing.JFrame {
     private void initComponents() {
 
         button1 = new java.awt.Button();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lvlFechaDesde = new javax.swing.JLabel();
+        lvlFechaHasta = new javax.swing.JLabel();
         fechaHasta = new com.toedter.calendar.JDateChooser();
         fechaDesde = new com.toedter.calendar.JDateChooser();
         btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        listLlamadas = new javax.swing.JList<>();
         btnSeleccionarLlamada = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         lvlSeleccioneUnaLlamada = new javax.swing.JLabel();
@@ -55,9 +55,9 @@ public class ConsultarEncuesta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Fecha desde:");
+        lvlFechaDesde.setText("Fecha desde:");
 
-        jLabel2.setText("Fecha hasta:");
+        lvlFechaHasta.setText("Fecha hasta:");
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -66,7 +66,7 @@ public class ConsultarEncuesta extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(listLlamadas);
 
         btnSeleccionarLlamada.setText("Selecionar Llamada");
         btnSeleccionarLlamada.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +97,7 @@ public class ConsultarEncuesta extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(fechaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1))
+                                .addComponent(lvlFechaDesde))
                             .addGap(29, 29, 29)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
@@ -107,7 +107,7 @@ public class ConsultarEncuesta extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnCancelar))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
+                                    .addComponent(lvlFechaHasta)
                                     .addGap(0, 0, Short.MAX_VALUE)))))
                     .addComponent(lvlSeleccioneUnaLlamada, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
@@ -117,8 +117,8 @@ public class ConsultarEncuesta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(lvlFechaDesde)
+                    .addComponent(lvlFechaHasta))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(fechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -149,29 +149,29 @@ public class ConsultarEncuesta extends javax.swing.JFrame {
 
         gestorConsultarLlamada.buscarLlamadasPorFechas(fechaInicio, fechaFin); 
         
-        if (gestorConsultarLlamada.getLlamadasFiltradas().isEmpty()) {
+        if (gestorConsultarLlamada.getLlamadasConEncuesta().isEmpty()) {
     JOptionPane.showMessageDialog(this, "No hay Llamadas con encuesta respondida en el periodo seleccionado.", "Error", JOptionPane.ERROR_MESSAGE);
 }else {
         
         DefaultListModel<String> model = new DefaultListModel<>();
-    List<Llamada> llamadasFiltradas = gestorConsultarLlamada.getLlamadasFiltradas();
+    List<Llamada> llamadasFiltradas = gestorConsultarLlamada.getLlamadasConEncuesta();
 
     for (Llamada llamada : llamadasFiltradas) {
         model.addElement(gestorConsultarLlamada.mostrarLlamadasString(llamada)); // Asumiendo que tienes un método toString en la clase Llamada para obtener una representación en texto.
     }
 
-    jList1.setModel(model);}
+    listLlamadas.setModel(model);}
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnSeleccionarLlamadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarLlamadaActionPerformed
 // Obtener el índice seleccionado en la lista
-    int selectedIndex = jList1.getSelectedIndex();
+    int selectedIndex = listLlamadas.getSelectedIndex();
     
     // Verificar si se seleccionó una llamada
     if (selectedIndex != -1) {
         // Obtener la llamada seleccionada
         
-        gestorConsultarLlamada.setLlamadaSeleccionada(gestorConsultarLlamada.getLlamadasFiltradas().get(selectedIndex)); 
+        gestorConsultarLlamada.setLlamadaSeleccionada(gestorConsultarLlamada.getLlamadasConEncuesta().get(selectedIndex)); 
 
         String mensaje = gestorConsultarLlamada.formatearLlamadaSelecionada(gestorConsultarLlamada.getLlamadaSeleccionada());
        
@@ -263,10 +263,10 @@ public class ConsultarEncuesta extends javax.swing.JFrame {
     private java.awt.Button button1;
     private com.toedter.calendar.JDateChooser fechaDesde;
     private com.toedter.calendar.JDateChooser fechaHasta;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> listLlamadas;
+    private javax.swing.JLabel lvlFechaDesde;
+    private javax.swing.JLabel lvlFechaHasta;
     private javax.swing.JLabel lvlSeleccioneUnaLlamada;
     // End of variables declaration//GEN-END:variables
 }

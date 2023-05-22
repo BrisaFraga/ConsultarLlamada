@@ -31,7 +31,7 @@ public class Encuesta {
             // Manejo de la excepción en caso de que la fecha no pueda ser parseada correctamente
         }
     }
-     public String getFormattedFechaFinVigencia(String formato) {
+    public String getFormattedFechaFinVigencia(String formato) {
         SimpleDateFormat sdf = new SimpleDateFormat(formato);
         return sdf.format(fechaFinVigencia);
     }
@@ -57,6 +57,7 @@ public void setFechaFinVigencia(String fechaFinVigenciaString, String formatoFec
     public void agregarPregunta(Pregunta pregunta) {
         preguntas.add(pregunta);
     }
+    
     public String getDescripcion() {
         return descripcion;
     }

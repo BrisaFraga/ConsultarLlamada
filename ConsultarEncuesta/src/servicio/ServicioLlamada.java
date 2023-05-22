@@ -23,7 +23,7 @@ public class ServicioLlamada {
     public ServicioLlamada() {
     }
     
-     private static final String FORMATO_FECHA = "dd/MM/yyyy HH:mm:ss";
+    private static final String FORMATO_FECHA = "dd/MM/yyyy HH:mm:ss";
     
     public void finalizarLlamada(Llamada llamada) {
         // Obtener la fecha y hora actual
